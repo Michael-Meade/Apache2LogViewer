@@ -28,3 +28,6 @@ code will use the SaveFile class and the write_json method to save the ips and t
 gem install terminal-table
 
 ```
+
+### get_status method
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">More information about response status can be found here</a>
