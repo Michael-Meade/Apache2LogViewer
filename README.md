@@ -30,4 +30,16 @@ gem install terminal-table
 ```
 
 ### get_status method
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">More information about response status can be found here</a>
+More information about response status can be found  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">here</a>
+Calling this method will parse the apache2 logs and create a JSON file that contains the number of tiems each status code was seen. 
+
+### get_ua
+User Agents are used to tell the website what type of device you are. User-agents have information about the device like the Operating system, the type of browser. The user sending the requests can change the user-agent to anything they want. A lot of scripts or programs will change their useragent to the name of the project. For example, the user agent went someone is using cURL to send requests to a site will contain Curl. This can be changed easily. User agents also allow web sites to act differently depending on the type of device, os or even the browser. 
+
+```ruby
+require_relative 'lib'
+# Scrapes the ips from the apache2 log file. 
+json = Template.new("access.log.4").get_ip
+
+```
+More information can be found <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent">here</a>
