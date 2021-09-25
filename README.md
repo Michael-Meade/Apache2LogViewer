@@ -9,7 +9,7 @@ Print.new(json, width: 100).top_ten_pt
 ```
 The code on the first line of the snippet above is really important. It is needed to access the SaveFile & the Print class.  The code will read the `ips.json` class and `Print` class.
 
-<img src="https://i.imgur.com/NojABOE.png" alt="table showing top ips"  width="50%" height="50%">
+<img src="https://i.imgur.com/NojABOE.png" alt="table showing top ips"  width="75%" height="75%">
 
 ### Save Json
 
