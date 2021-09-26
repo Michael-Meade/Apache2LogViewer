@@ -48,3 +48,12 @@ More information about user agents can be found <a href="https://developer.mozil
 
 
 More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here.</a>
+
+### get_method
+```ruby
+require_relative 'lib'
+# Scrapes the ips from the apache2 log file. 
+json = Template.new("access.log.4").get_ip
+
+
+```
