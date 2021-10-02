@@ -1,6 +1,46 @@
 require 'date'
 require 'terminal-table'
 require 'json'
+require 'net/ssh'
+require 'json'
+class SSH
+    def initialize
+        c      = Config.new
+        @ssh   = Net::SSH.start(c.ip, c.uname, :password => c.pass, :port => c.port)
+    end
+    def login(cmd)
+        return @ssh.exec!(cmd)
+    end
+end
+class DownloadFile < SSH
+    def initialize(file_name, cmd = "cat /var/log/apache2/access.log")
+        @file_name = file_name
+        @cmd       = cmd
+    end
+    def dl_file
+        txt   = SSH.new.login(@cmd)
+        File.open(@file_name, 'w') { |f| f.write(txt) }
+    end
+end
+class Config
+    def initialize
+        if File.exist?("config.json")
+            @json = JSON.parse(File.read("config.json").to_s)
+        end
+        def ip
+            @json["ip"]
+        end
+        def uname
+            @json["uname"]
+        end
+        def pass
+            @json["pass"]
+        end
+        def port
+            @json["port"]
+        end
+    end
+end
 class Template
     def initialize(file)
         @file = file
@@ -48,6 +88,7 @@ class Template
     def get_path
         urls = []
         @read.each do |i| 
+            p i
             if not i.split('"')[1].split(" ")[1].nil?
                 urls << i.split('"')[1].split(" ")[1]
             end
@@ -79,6 +120,7 @@ class SaveFile
     def initialize(json = nil, file_name: "out.json")
         @json      = json
         @file_name = file_name
+        #File.open(@file_name, 'w') { |f| f.write("{}") } if !File.exists?(@file_name)
     end
     def check_exists
         return File.exist?(@file_name)
@@ -94,11 +136,20 @@ class SaveFile
         end
     end
     def read_json
-        r = File.read(@file_name)
-        j = JSON.parse(r)
+        if check_exists
+            r = File.read(@file_name)
+            j = JSON.parse(r)
+        end
     end
 end
-
+class FileDate
+    def initialize(ext)
+        @ext = ext
+    end
+    def date_file
+        Date.today.to_s + @ext
+    end
+end
 class Print
     def initialize(json, title = nil, h1 = nil, h2 = nil, width: 40)
         @json    = json
