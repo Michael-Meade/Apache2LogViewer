@@ -12,7 +12,6 @@ class SaveBar
       @j        = JSON.parse(File.read(@file_name)).sort_by{|k,v| -v}.first(10).to_h
     else 
       @j        = @file_name.sort_by{|k,v| -v}.first(10)
-      puts @j
     end
   end
   def color
