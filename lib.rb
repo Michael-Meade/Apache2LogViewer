@@ -88,7 +88,6 @@ class Template
     def get_path
         urls = []
         @read.each do |i| 
-            p i
             if not i.split('"')[1].split(" ")[1].nil?
                 urls << i.split('"')[1].split(" ")[1]
             end
@@ -144,7 +143,7 @@ class SaveFile
 end
 class FileDate
     def initialize(ext)
-        @ext = ext
+        @ext = ext 
     end
     def date_file
         Date.today.to_s + @ext
@@ -194,7 +193,7 @@ class Print
         else
             table.headings = ['IP', 'attempts']
         end
-        table.rows = out
+        table.rows  = out
         table.style = {:width => @width, :border => :unicode_round, :alignment => :center }
         puts table
     end
@@ -205,5 +204,5 @@ json = Template.new("access.log.4").get_path
 json = SaveFile.new(json).write_json
 #APrint.new(json, width: 100).top_ten_pt
 =end
-#Ajson = SaveFile.new(json).read_json
-#APrint.new(json, width: 100).top_ten_pt
+#json = SaveFile.new(json).read_json
+#Print.new(json, width: 100).top_ten_pt
