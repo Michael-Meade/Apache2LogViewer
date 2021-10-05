@@ -45,10 +45,6 @@ json = Template.new("access.log.4").get_ip
 ```
 More information about user agents can be found <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent">here</a>
 
-
-
-More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here.</a>
-
 ### get_method
 ```ruby
 require_relative 'lib'
@@ -57,3 +53,28 @@ json = Template.new("access.log.4").get_ip
 
 
 ```
+
+### Download the access.log file remotely
+```ruby
+require_relative 'lib'
+require 'date'
+# get the apache2 logs on a remote server
+date = Date.today.to_s + ".access"+ ".log"
+d    = DownloadFile.new(date)
+d.dl_file
+```
+
+
+### Using the SaveBar class
+```ruby
+require_relative 'lib'
+require_relative 'gruff'
+json = Template.new("access.log").get_path
+png  = FileDate.new(".png").date_file
+SaveBar.new(json, png, title: "Paths", json: true).create_bar
+
+```
+The `SaveBar` class is used to take the JSON that was scraped from the logs and it will create a bar graph with the data. 
+The `SaveBar` class has a instance variable that is named json. If `json` was set as true then the class will accept JSON data instead of reading a JSON file. If the instance variable json was set to false then the class will accept JSON files. The title of the graph is Paths. The `FileDate` class can be used to get create a file with the current date in the name as its name. The FileDate class is used in the example above to create a string with the current date. This string will be name of the PNG file that contains the bar graph.
+
+More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here.</a>

@@ -76,6 +76,18 @@ class Template
         end
     return count_total(status)
     end
+    def path_ip(ip)
+        # gets all the paths from a certain IP.
+        status  = []
+        @read.each do |i|
+            if not i.split('"').nil?
+                if i.split("- -")[0].strip == ip
+                    status << i.split('"')[1].split(" ")[1]
+                end
+            end
+        end
+    return count_total(status)
+    end
     def get_ip
         ips = []
         @read.each do |i|
