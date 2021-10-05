@@ -77,4 +77,19 @@ SaveBar.new(json, png, title: "Paths", json: true).create_bar
 The `SaveBar` class is used to take the JSON that was scraped from the logs and it will create a bar graph with the data. 
 The `SaveBar` class has a instance variable that is named json. If `json` was set as true then the class will accept JSON data instead of reading a JSON file. If the instance variable json was set to false then the class will accept JSON files. The title of the graph is Paths. The `FileDate` class can be used to get create a file with the current date in the name as its name. The FileDate class is used in the example above to create a string with the current date. This string will be name of the PNG file that contains the bar graph.
 
+### Scraping logs & create bar graph w/o saving JSON
+```ruby
+require_relative 'lib'
+require_relative 'gruff'
+j = {}
+Dir['*'].each do |file_name|
+    if file_name.include?("access.log")
+        json = Template.new(file_name).get_path
+        j.merge!(json) { |k, m, n| m + n }
+    end
+end
+png = FileDate.new(".png").date_file
+SaveBar.new(j, png, title: "IPS", json: true).create_bar
+
+```
 More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here.</a>
