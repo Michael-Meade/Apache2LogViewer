@@ -29,7 +29,10 @@ code will use the SaveFile class and the write_json method to save the ips and t
 gem install terminal-table
 
 ```
+```bash
+gem install gruff
 
+```
 ### get_status method
 More information about response status can be found  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">here</a>
 Calling this method will parse the apache2 logs and create a JSON file that contains the number of tiems each status code was seen. 
