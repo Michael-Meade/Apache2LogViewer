@@ -106,4 +106,25 @@ png = FileDate.new(".png").date_file
 SaveBar.new(j, png, title: "IPS", json: true).create_bar
 
 ```
+### Discord.rb
+```ruby
+require 'discordrb'
+require 'open3'
+require 'json'
+Bot = Discordrb::Commands::CommandBot.new token: '', client_id:  , prefix: '.'
+cmd = 'curl -F "file=@access.log" https://api.anonfiles.com/upload -k'
+stdout, status = Open3.capture3(cmd)
+j = JSON.parse(stdout)
+Bot.send_message("", "#{j["data"]["file"]["url"]["full"]}")
+
+```
+
+The code is meant to be ran by a cronjob every day at 6 PM. Make sure that the add your token and client id. The code will upload your access.log to anonfiles.com. Then send the URL to a dicord channel of your choice. 
+```bash
+0 18 * * * cd /var/log/apache2; ruby Discord.rb >/dev/null 2>&1
+
+```
+The snippet above is the crontab that I used on VPS to run the script. 
+
+
 More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here.</a>
