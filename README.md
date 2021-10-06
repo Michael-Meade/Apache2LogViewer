@@ -124,7 +124,7 @@ The code is meant to be ran by a cronjob every day at 6 PM. Make sure that the a
 0 18 * * * cd /var/log/apache2; ruby Discord.rb >/dev/null 2>&1
 
 ```
-The snippet above is the crontab that I used on VPS to run the script. 
+The snippet above is the crontab that I used on VPS to run the script. It will run every day at 6:00 PM.
 
 
 More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here.</a>
