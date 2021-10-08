@@ -3,6 +3,15 @@ require 'terminal-table'
 require 'json'
 require 'net/ssh'
 require 'json'
+class HoneyPot
+    def initialize(config_file: "honeypot_config.json")
+        @config_file = config_file
+        @read        = JSON.parse(@config_file)
+    end
+    def read_config
+        @read["files"]
+    end
+end
 class SSH
     def initialize
         c      = Config.new
@@ -27,18 +36,18 @@ class Config
         if File.exist?("config.json")
             @json = JSON.parse(File.read("config.json").to_s)
         end
-        def ip
-            @json["ip"]
-        end
-        def uname
-            @json["uname"]
-        end
-        def pass
-            @json["pass"]
-        end
-        def port
-            @json["port"]
-        end
+    end
+    def ip
+        @json["ip"]
+    end
+    def uname
+        @json["uname"]
+    end
+    def pass
+        @json["pass"]
+    end
+    def port
+        @json["port"]
     end
 end
 class Template
@@ -154,11 +163,16 @@ class SaveFile
     end
 end
 class FileDate
-    def initialize(ext)
-        @ext = ext 
+    def initialize(ext, type: "")
+        @ext  = ext 
+        @type = type
     end
     def date_file
-        Date.today.to_s + @ext
+        if !@type.empty?
+            Date.today.to_s + "-#{@type}" + @ext 
+        else
+            Date.today.to_s + @ext
+        end
     end
 end
 class Print

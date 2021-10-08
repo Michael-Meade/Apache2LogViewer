@@ -7,5 +7,6 @@ Dir['*'].each do |file_name|
         j.merge!(json) { |k, m, n| m + n }
         #json = json.delete_if {|key, value| key[1] == "/" or key[  
     end
-SaveBar.new(j, "ips_ddddd.png", title: "Methods", json: true, num: 10, show_labels: true).create_bar
+png = FileDate.new(".png", type: "ip").date_file
+SaveBar.new(j, png, title: "ip", json: true, num: 10, show_labels: true).create_bar
 end
