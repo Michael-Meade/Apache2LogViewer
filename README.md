@@ -78,7 +78,6 @@ d    = DownloadFile.new(date)
 d.dl_file
 ```
 
-
 ### Using the SaveBar class
 ```ruby
 require_relative 'lib'
@@ -125,6 +124,36 @@ The code is meant to be ran by a cronjob every day at 6 PM. Make sure that the a
 
 ```
 The snippet above is the crontab that I used on VPS to run the script. It will run every day at 6:00 PM.
+
+
+### honeypot.rb
+```ruby
+puts HoneyPot.new(type: 4).scan
+
+```
+The code above uses the HoneyPot class. It allows its users to create a config that contains a JSON hash of all the paths they created on their web server. For example if the user created a fake login page for Mysql that will save the inputed data. The user could add the web path to the config file. When `HoneyPot.new(type: 4).scan` is called the code will look through all the access.log files and count the number of times that honeypot web path was vistited.
+
+
+
+|     type #    |    method     |
+| ------------- | ------------- |
+|       1       |   get_date    |
+|       2       |   get_status  |
+|       3       |   get_get_ip  |
+|       4       |   get_path    |
+|       5       |   get_ua      |
+|       6       |   get_path    |
+
+
+The table above shows the different types that of scraping that can be done. In the code snippet above we used the `get_path` method to get all the web paths that were vistited. 
+
+### Log Crawling
+```ruby
+require_relative 'lib'
+puts LogsCrawl.new(4).run
+
+```
+Instead of having to reuse the same code everytime  ( auto_scrape.rb) when the user wants to loop through all thefiles in the directory looking for access.logs, the `LogsCrawl` class can be called.  Similiar to the hoenypot code, the class uses the same types listed in the table above. The code will return a HASH with the data from the logs. 
 
 
 More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here.</a>
