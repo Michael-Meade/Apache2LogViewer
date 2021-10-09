@@ -4,12 +4,25 @@ require 'json'
 require 'net/ssh'
 require 'json'
 class HoneyPot
-    def initialize(config_file: "honeypot_config.json")
+    def initialize(config_file: "honeypot_config.json", type: 4)
         @config_file = config_file
-        @read        = JSON.parse(@config_file)
+        @read        = JSON.parse(File.read(@config_file).to_s)
+        @type        = type
     end
     def read_config
         @read["files"]
+    end
+    def scan
+        config = read_config
+        j      = LogsCrawl.new(@type).run
+        jj     = {}
+        config.each do |c|
+            found     =  c if j.keys.any?(c)
+            if !found.nil?
+                jj[c] = j[found]
+            end
+        end
+    return jj
     end
 end
 class SSH
@@ -224,11 +237,48 @@ class Print
         puts table
     end
 end
+class Types
+    def initialize(file_name, type)
+        @file_name = file_name
+        @type      = type
+        @t         = Template.new(@file_name)
+    end
+    def switch
+        if @type == 1
+            return @t.get_date
+        elsif @type == 2
+            return @t.get_status
+        elsif @type == 3
+            return @t.get_ip
+        elsif @type == 4
+            return @t.get_path
+        elsif @type == 5
+            return @t.get_ua
+        elsif @type == 6
+            return @t.get_path
+        end
+    end
+end
+class LogsCrawl
+    def initialize(type)
+        @type = type
+    end
+    def run
+        j = {}
+        Dir['*'].each do |file_name|
+            if file_name.include?("access.log")
+                json = Types.new(file_name, @type).switch
+                j.merge!(json) { |k, m, n| m + n }
+            end
+        end
+    return j
+    end
+end
 =begin
 json = Template.new("access.log.4").get_path
 #SaveFile.new(json).write_json
 json = SaveFile.new(json).write_json
-#APrint.new(json, width: 100).top_ten_pt
+#Print.new(json, width: 100).top_ten_pt
 =end
 #json = SaveFile.new(json).read_json
 #Print.new(json, width: 100).top_ten_pt
