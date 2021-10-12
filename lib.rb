@@ -148,6 +148,22 @@ class Template
         end
     return count_total(meth)
     end
+    def ip_path
+        ips = []
+        h   = {}
+        # scrapes all the IPS
+        get_ip.each { |key, value| ips << key }.uniq 
+        # Uses the path_ip(ip) method to get all the web paths 
+        # that it finds for that IP.
+        ips.each_with_index do |ip|
+            path  = path_ip(ip)
+            path  = path.delete_if {|key, value| key.nil? or key.empty?}
+            h[ip] = [path.compact]
+        end
+    # returns a hash with 
+    # IPS as key and all the web paths that was found .
+    return h
+    end
 end
 class SaveFile
     def initialize(json = nil, file_name: "out.json")
@@ -256,6 +272,8 @@ class Types
             return @t.get_ua
         elsif @type == 6
             return @t.get_path
+        elsif @type == 7
+            return @t.ip_path
         end
     end
 end
