@@ -98,18 +98,6 @@ class Template
         end
     return count_total(status)
     end
-    def path_ip(ip)
-        # gets all the paths from a certain IP.
-        status  = []
-        @read.each do |i|
-            if not i.split('"').nil?
-                if i.split("- -")[0].strip == ip
-                    status << i.split('"')[1].split(" ")[1]
-                end
-            end
-        end
-    return count_total(status)
-    end
     def get_ip
         ips = []
         @read.each do |i|
@@ -163,6 +151,18 @@ class Template
     # returns a hash with 
     # IPS as key and all the web paths that was found .
     return h
+    end
+    def path_ip(ip)
+        # gets all the paths from a certain IP.
+        status  = []
+        @read.each do |i|
+            if not i.split('"').nil?
+                if i.split("- -")[0].strip == ip
+                    status << i.split('"')[1].split(" ")[1]
+                end
+            end
+        end
+    return count_total(status)
     end
 end
 class SaveFile
@@ -259,6 +259,22 @@ class Types
         @type      = type
         @t         = Template.new(@file_name)
     end
+    def switch_name
+        if @type == "date"
+            return @t.get_date
+        elsif @type == "status"
+            return @t.get_status
+        elsif @type == "ip"
+            return @t.get_ip
+        elsif @type == "path"
+            return @t.get_path
+        elsif @type == "ua"
+            return @t.get_ua
+        elsif @type == "method"
+            return @t.get_method
+        end
+
+    end
     def switch
         if @type == 1
             return @t.get_date
@@ -271,9 +287,7 @@ class Types
         elsif @type == 5
             return @t.get_ua
         elsif @type == 6
-            return @t.get_path
-        elsif @type == 7
-            return @t.ip_path
+            return @t.get_method
         end
     end
 end
