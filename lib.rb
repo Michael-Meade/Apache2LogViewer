@@ -288,6 +288,8 @@ class Types
             return @t.get_ua
         elsif @type == 6
             return @t.get_method
+        elsif @type == 7
+            return @t.ip_path
         end
     end
 end
