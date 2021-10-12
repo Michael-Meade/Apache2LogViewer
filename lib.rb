@@ -272,6 +272,8 @@ class Types
             return @t.get_ua
         elsif @type == "method"
             return @t.get_method
+        elsif @type == "ip-path"
+            return @t.ip_path
         end
 
     end
