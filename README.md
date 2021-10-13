@@ -139,13 +139,29 @@ The code above uses the HoneyPot class. It allows its users to create a config t
 | ------------- | ------------- |
 |       1       |   get_date    |
 |       2       |   get_status  |
-|       3       |   get_get_ip  |
+|       3       |   get_ip      |
 |       4       |   get_path    |
 |       5       |   get_ua      |
-|       6       |   get_path    |
+|       6       |   get_method  |
+|       7       |   ip_path     |
+
+The table above shows the different types that of scraping that can be done. In the code snippet above we used the `get_path` method to get all the web paths that were vistited.
 
 
-The table above shows the different types that of scraping that can be done. In the code snippet above we used the `get_path` method to get all the web paths that were vistited. 
+|  method name  |    method     |
+| ------------- | ------------- |
+|  "date"       |   get_date    |
+|  "status"     |   get_status  |
+|  "ip"         |   get_ip      |
+|  "path"       |   get_path    |
+|  "ua"         |   get_ua      |
+|  "method"     |   get_method  |
+|  "ip_path"    |   ip_path     | 
+
+```ruby
+Type.new("access.log", "date").switch_name
+
+```
 
 ### Log Crawling
 ```ruby
