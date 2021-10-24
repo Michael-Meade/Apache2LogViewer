@@ -2,6 +2,7 @@ require 'date'
 require 'terminal-table'
 require 'json'
 require 'net/ssh'
+require 'colorize'
 require 'json'
 class HoneyPot
     def initialize(config_file: "honeypot_config.json", type: 4)
@@ -136,6 +137,7 @@ class Template
         end
     return count_total(meth)
     end
+
     def ip_path
         ips = []
         h   = {}
@@ -158,13 +160,14 @@ class Template
         @read.each do |i|
             if not i.split('"').nil?
                 if i.split("- -")[0].strip == ip
-                    status << i.split('"')[1].split(" ")[1]
+                    status << i.split('"')[2].split(" ")[0]
                 end
             end
         end
     return count_total(status)
     end
 end
+
 class SaveFile
     def initialize(json = nil, file_name: "out.json")
         @json      = json
@@ -195,6 +198,9 @@ class FileDate
     def initialize(ext, type: "")
         @ext  = ext 
         @type = type
+    end
+    def date
+        Date.today.to_s
     end
     def date_file
         if !@type.empty?
@@ -277,7 +283,7 @@ class Types
         end
 
     end
-    def switch
+    def switch(ip=nil)
         if @type == 1
             return @t.get_date
         elsif @type == 2
@@ -292,24 +298,35 @@ class Types
             return @t.get_method
         elsif @type == 7
             return @t.ip_path
+        elsif @type == 8
+            if !ip.nil?
+                return @t.path_ip(ip)
+            end
         end
     end
 end
 class LogsCrawl
     def initialize(type)
-        @type = type
+        @type      = type
     end
-    def run
-        j = {}
+
+    def run(ip: nil)
+        @j = {}
         Dir['*'].each do |file_name|
             if file_name.include?("access.log")
-                json = Types.new(file_name, @type).switch
-                j.merge!(json) { |k, m, n| m + n }
+                if ip.nil?
+                    json = Types.new(file_name, @type).switch
+                    @j.merge!(json) { |k, m, n| m + n }
+                else
+                    json = Types.new(file_name, @type).switch(ip)
+                    @j.merge!(json) { |k, m, n| m + n }
+                end
             end
         end
-    return j
+    return @j
     end
 end
+
 =begin
 json = Template.new("access.log.4").get_path
 #SaveFile.new(json).write_json

@@ -162,6 +162,7 @@ The table above shows the different types that of scraping that can be done. In 
 Type.new("access.log", "date").switch_name
 
 ```
+The snippet above shows the Type class in action. Instead of using a number for thet type, the `switch_name` method uses names to get the name of the method to run. The code snippet above will extract dates from the logs. 
 
 ### Log Crawling
 ```ruby
