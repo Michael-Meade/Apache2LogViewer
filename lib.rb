@@ -239,7 +239,6 @@ class Print
         puts table
     end
     def print_table
-        p @h2
         out = []
         @json.sort_by{|k,v| -v}.each do |k, v|
             out << [k, v]
