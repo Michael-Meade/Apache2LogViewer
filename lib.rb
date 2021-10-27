@@ -326,12 +326,22 @@ class LogsCrawl
     return @j
     end
 end
-
-=begin
-json = Template.new("access.log.4").get_path
-#SaveFile.new(json).write_json
-json = SaveFile.new(json).write_json
-#Print.new(json, width: 100).top_ten_pt
-=end
-#json = SaveFile.new(json).read_json
-#Print.new(json, width: 100).top_ten_pt
+class Stats
+    def initialize(type)
+        @type = type
+    end
+    def run
+        k = LogsCrawl.new(@type)
+        j = k.run
+        total = 0
+        j.each do |k,v|
+          total += v
+        end
+        out = {}
+        j.each do |k,v|
+          kk = (v.to_i/total.to_f) * 100
+          out[k] = kk.to_s + "%"
+        end
+    return out
+    end
+end
