@@ -234,11 +234,12 @@ class Print
         else
             table.headings = ['IP', 'attempts']
         end
-        table.rows = out
+        table.rows  = out
         table.style = {:width => @width, :border => :unicode_round, :alignment => :center }
         puts table
     end
     def print_table
+        p @h2
         out = []
         @json.sort_by{|k,v| -v}.each do |k, v|
             out << [k, v]
@@ -340,7 +341,7 @@ class Stats
         out = {}
         j.each do |k,v|
           kk = (v.to_i/total.to_f) * 100
-          out[k] = kk.to_s + "%"
+          out[k] = kk.to_f
         end
     return out
     end
