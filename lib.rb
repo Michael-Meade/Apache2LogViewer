@@ -137,7 +137,6 @@ class Template
         end
     return count_total(meth)
     end
-
     def ip_path
         ips = []
         h   = {}
@@ -160,14 +159,14 @@ class Template
         @read.each do |i|
             if not i.split('"').nil?
                 if i.split("- -")[0].strip == ip
-                    status << i.split('"')[2].split(" ")[0]
+                    status << SearchIP.new.options(i, type)
+                    #status << i.split('"')[1].split(" ")[1]
                 end
             end
         end
     return count_total(status)
     end
 end
-
 class SaveFile
     def initialize(json = nil, file_name: "out.json")
         @json      = json
@@ -281,7 +280,6 @@ class Types
         elsif @type == "ip-path"
             return @t.ip_path
         end
-
     end
     def switch(ip=nil)
         if @type == 1
@@ -309,7 +307,6 @@ class LogsCrawl
     def initialize(type)
         @type      = type
     end
-
     def run(ip: nil)
         @j = {}
         Dir['*'].each do |file_name|
@@ -343,5 +340,22 @@ class Stats
           out[k] = kk.to_f
         end
     return out
+    end
+end
+class SearchIP
+    def options(line, type)
+        if type.to_i == 1
+            return line.split("[")[1].split("]")[0]
+        elsif type.to_i == 2
+            return line.split('"')[2].split(" ")[0]
+        elsif type.to_i == 3
+            return line.split("- -")[0].strip
+        elsif type.to_i == 4
+            return line.split('"')[1].split(" ")[1]
+        elsif type.to_i == 5
+            return line.split('"')[5]
+        elsif type.to_i == 6
+            return line.split('"')[1].split(" ")[0]
+        end
     end
 end
