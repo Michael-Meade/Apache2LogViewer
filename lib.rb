@@ -153,7 +153,7 @@ class Template
     # IPS as key and all the web paths that was found .
     return h
     end
-    def path_ip(ip, type)
+    def search(ip, type)
         # gets all the paths from a certain IP.
         status  = []
         @read.each do |i|
@@ -264,7 +264,7 @@ class Types
         @type      = type
         @t         = Template.new(@file_name)
     end
-    def switch_name
+    def switch_name(ip=nil, type: nil)
         if @type == "date"
             return @t.get_date
         elsif @type == "status"
@@ -277,8 +277,10 @@ class Types
             return @t.get_ua
         elsif @type == "method"
             return @t.get_method
-        elsif @type == "ip-path"
-            return @t.ip_path
+        elsif @type == "search"
+            if !ip.nil?
+                return @t.search(ip, type)
+            end
         end
     end
     def switch(ip=nil, type: nil)
@@ -298,7 +300,7 @@ class Types
             return @t.ip_path
         elsif @type == 8
             if !ip.nil?
-                return @t.path_ip(ip, type)
+                return @t.search(ip, type)
             end
         end
     end
