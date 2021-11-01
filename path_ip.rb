@@ -11,6 +11,6 @@ end
 #p j
 
  
-type = "Path"
+type = "IP"
 png = FileDate.new(".png", type: type).date_file
 SaveBar.new(j, png, title: type, json: true, num: 10, show_labels: true).create_bar

@@ -297,8 +297,6 @@ class Types
         elsif @type == 6
             return @t.get_method
         elsif @type == 7
-            return @t.ip_path
-        elsif @type == 8
             if !ip.nil?
                 return @t.search(ip, type)
             end
