@@ -5,29 +5,29 @@ require 'optparse'
 options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: example.rb [options]"
-  opts.on("-ip", "--ip", "IP") do |v|
-    options[:ip] = true
+  opts.on("ip", "--ip") do |v|
+    options[:ip]     = true
   end
-  opts.on("-path", "--path", "Path") do |v|
-    options[:path] = true
+  opts.on("path", "--path") do |v|
+    options[:path]   = true
   end
-  opts.on("-status", "--status", "status") do |v|
+  opts.on("status", "status") do |v|
     options[:status] = true
   end
-  opts.on("-date", "--date", "date") do |v|
-    options[:date] = true
+  opts.on("date", "--date") do |v|
+    options[:date]   = true
   end
-  opts.on("-meth", "--meth", "meth") do |v|
-    options[:meth] = true
+  opts.on("meth", "--meth") do |v|
+    options[:meth]   = true
   end
-  opts.on("-ssh", "--ssh", "ssh") do |v|
-    options[:ssh] = true
+  opts.on("ssh", "--ssh") do |v|
+    options[:ssh]    = true
   end
-  opts.on("-pt", "--pt=1", "print table") do |v|
-      options[:pt] = v
+  opts.on("pt", "--pt=1", "print table") do |v|
+      options[:pt]   = v
   end
-  opts.on("-s", "--s=", "Stats") do |v|
-      options[:s] = v
+  opts.on("s", "--s=", "Stats") do |v|
+      options[:s]    = v
   end
   opts.on("-sip", "--sip=IP", "type=TYPE","search ip") do |v|
       options[:sip]  =  v[0]
