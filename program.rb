@@ -71,7 +71,7 @@ if options[:ip]
 end
 if options[:path]
   if options[:print]
-    lc = LogsCrawl.new(4).run
+    lc   = LogsCrawl.new(4).run
     if options[:sort]
       lc = lc.sort_by{|k,v| -v}
     end
@@ -105,8 +105,8 @@ if options[:sip]
   p lc
 end
 if options[:json]
-  type = options[:type]
-  tn   = Types.new(type.to_i).type_to_name
-  lc   = LogsCrawl.new(type.to_i).run
+  type  = options[:type]
+  tn    = Types.new(type.to_i).type_to_name
+  lc    = LogsCrawl.new(type.to_i).run
   File.open("#{Date.today.to_s}-#{tn}.json", 'a') { |f| f.write(JSON.generate(lc)) }
 end
