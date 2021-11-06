@@ -98,7 +98,13 @@ if options[:pt]
 end
 if options[:s]
   stats  = Stats.new(options[:s].to_i).run
-  Print.new(stats.first(10), width:100).print_table
+  s      = options[:s].to_i
+  if options[:print].nil?
+    png    = FileDate.new(".png", type: s.to_s ).date_file
+    SaveBar.new(stats.first(10), png, title: "Stats", json: true, num: 10, show_labels: true).create_bar
+  else
+    Print.new(stats.first(10), width:100).print_table
+  end
 end
 if options[:sip]
   lc = LogsCrawl.new(7).run(ip: options[:sip])
@@ -108,5 +114,6 @@ if options[:json]
   type  = options[:type]
   tn    = Types.new(type.to_i).type_to_name
   lc    = LogsCrawl.new(type.to_i).run
-  File.open("#{Date.today.to_s}-#{tn}.json", 'a') { |f| f.write(JSON.generate(lc)) }
+  File.open("#{Date.today.to_s}-#{tn}.json", 'a') { |f| f.write(JSON.pretty_generate(lc)) }
+    #JSON.generate(lc)) }
 end
