@@ -259,10 +259,12 @@ class Print
     end
 end
 class Types
-    def initialize(file_name, type)
+    def initialize(file_name=nil, type)
         @file_name = file_name
         @type      = type
-        @t         = Template.new(@file_name)
+        if !file_name.nil?
+            @t         = Template.new(@file_name)
+        end
     end
     def switch_name(ip=nil, type: nil)
         if @type == "date"
@@ -281,6 +283,23 @@ class Types
             if !ip.nil?
                 return @t.search(ip, type)
             end
+        end
+    end
+    def type_to_name
+        if @type == 1
+            return "dates"
+        elsif @type == 2
+            return "status"
+        elsif @type == 3
+            return "ip"
+        elsif @type == 4
+            return "path"
+        elsif @type == 5
+            return "ua"
+        elsif @type == 6
+            return "method"
+        elsif @type == 7
+            return "search"
         end
     end
     def switch(ip=nil, type: nil)
