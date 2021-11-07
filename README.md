@@ -9,6 +9,9 @@ gem install terminal-table
 gem install gruff
 
 ```
+```bash
+gem install colorize
+```
 
 ### Read from json file print table
 ```ruby
