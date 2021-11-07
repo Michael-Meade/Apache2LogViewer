@@ -191,4 +191,9 @@ Get Status - Will crate bar graph
 ```ruby
 ruby program.rb -status
 ```
-More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here.</a>
+Print out stats table
+```ruby
+ruby program.rb --s 3 --print
+```
+The 3 is the type, IP.
+More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here,</a> <a href="https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html">here</a>
