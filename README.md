@@ -9,6 +9,9 @@ gem install terminal-table
 gem install gruff
 
 ```
+```bash
+gem install colorize
+```
 
 ### Read from json file print table
 ```ruby
@@ -173,4 +176,27 @@ puts LogsCrawl.new(4).run
 Instead of having to reuse the same code everytime  ( auto_scrape.rb) when the user wants to loop through all thefiles in the directory looking for access.logs, the `LogsCrawl` class can be called.  Similiar to the hoenypot code, the class uses the same types listed in the table above. The code will return a HASH with the data from the logs. 
 
 
-More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here.</a>
+### program.rb
+
+Get stats of IPs
+```ruby
+ruby program.rb --s 3
+```
+Get IP - will create a bar graph
+```ruby 
+ruby program.rb -ip
+```
+Get Paths - will create a bar graph
+```ruby
+ruby program.rb -path
+```
+Get Status - Will crate bar graph
+```ruby
+ruby program.rb -status
+```
+Print out stats table
+```ruby
+ruby program.rb --s 3 --print
+```
+The 3 is the type, IP.
+More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here,</a> <a href="https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html">here</a>
