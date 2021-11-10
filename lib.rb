@@ -3,7 +3,6 @@ require 'terminal-table'
 require 'json'
 require 'net/ssh'
 require 'colorize'
-require 'json'
 class HoneyPot
     def initialize(config_file: "honeypot_config.json", type: 4)
         @config_file = config_file
@@ -376,5 +375,18 @@ class SearchIP
         elsif type.to_i == 6
             return line.split('"')[1].split(" ")[0]
         end
+    end
+end
+class Sample
+    def initialize(type, num = 10)
+        @type = type
+        @num  = num
+    end
+    def run
+        out  = []
+        data = LogsCrawl.new(@type.to_i).run
+        d    = data.sort_by{|k,v| -v}
+        k    = d.each {|i| out << i if i[1].to_f >= 3}
+        return out.sample(@num).sort_by{|k,v| -v}
     end
 end

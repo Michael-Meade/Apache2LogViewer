@@ -6,7 +6,7 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: example.rb [options]"
   opts.on("--print [PRINT]") do |v|
-    options[:print]     = true
+    options[:print]  = true
   end
   opts.on("-ip", "ip") do |v|
     options[:ip]     = true
@@ -15,7 +15,7 @@ OptionParser.new do |opts|
     options[:path]   = true
   end
   opts.on("--json=[TYPE]") do |v|
-    options[:json] = true
+    options[:json]   = true
   end
   opts.on("--status [STATUS]", "status") do |v|
     options[:status] = true
@@ -44,12 +44,19 @@ OptionParser.new do |opts|
   opts.on("--sip [IP]", "type=TYPE","search ip") do |v|
       options[:sip]  =  v
   end
+  opts.on("-list") do |v|
+      options[:list]  =  v
+  end
 end.parse!
 def logs_crawl(type, name)
     lc  = LogsCrawl.new(type).run
     png = FileDate.new(".png", type: name).date_file
     SaveBar.new(lc, png, title: name, json: true, num: 10, show_labels: true).create_bar
-end 
+end
+
+
+
+
 if options[:date]
   logs_crawl(1, "date")
 end
@@ -100,7 +107,7 @@ if options[:s]
   stats  = Stats.new(options[:s].to_i).run
   s      = options[:s].to_i
   if options[:print].nil?
-    png    = FileDate.new(".png", type: s.to_s ).date_file
+    png  = FileDate.new(".png", type: s.to_s ).date_file
     SaveBar.new(stats.first(10), png, title: "Stats", json: true, num: 10, show_labels: true).create_bar
   else
     Print.new(stats.first(10), width:100).print_table
@@ -111,9 +118,19 @@ if options[:sip]
   p lc
 end
 if options[:json]
-  type  = options[:type]
-  tn    = Types.new(type.to_i).type_to_name
-  lc    = LogsCrawl.new(type.to_i).run
-  File.open("#{Date.today.to_s}-#{tn}.json", 'a') { |f| f.write(JSON.pretty_generate(lc)) }
-    #JSON.generate(lc)) }
+  if !options[:type].nil?
+    type  = options[:type]
+    tn    = Types.new(type.to_i).type_to_name
+    lc    = LogsCrawl.new(type.to_i).run
+    File.open("#{Date.today.to_s}-#{tn}.json", 'a') { |f| f.write(JSON.pretty_generate(lc)) }
+  else 
+    puts "dont forget:\n  --type 4"
+  end
+end
+if options[:list]
+  for i in 1..7
+    t = Types.new(nil, i).type_to_name
+    puts "#{i} - #{t}"
+    i+=1
+  end
 end
