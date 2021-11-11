@@ -1,5 +1,5 @@
 # Apache2LogViewer
-
+More info can be found @ <a href="https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html">https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html</a>
 # Installing the gems needed
 ```bash
 gem install terminal-table
