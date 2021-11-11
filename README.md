@@ -1,6 +1,6 @@
 # Apache2LogViewer
 
-### Installing the gems needed
+# Installing the gems needed
 ```bash
 gem install terminal-table
 
@@ -13,7 +13,7 @@ gem install gruff
 gem install colorize
 ```
 
-### Read from json file print table
+# Read from json file print table
 ```ruby
 require_relative 'lib'
 # read ips.json
@@ -25,7 +25,7 @@ The code on the first line of the snippet above is really important. It is neede
 
 <img src="https://i.imgur.com/NojABOE.png" alt="table showing top ips"  width="75%" height="75%">
 
-### Save Json
+# Save Json
 
 ```ruby
 require_relative 'lib'
@@ -37,7 +37,7 @@ SaveFile.new(json, "ips.json").write_json
 
 The code above will read the access.log.4 file and get all the ips found in the logs. Next the 
 code will use the SaveFile class and the write_json method to save the ips and the number of times it was seen.
-### get_date method
+# get_date method
 ```ruby
 
 require_relative 'lib'
@@ -47,11 +47,11 @@ SaveBar.new(json, "test.png", title: "Date", json: true).create_bar
 ```
 
 
-### get_status method
+# get_status method
 More information about response status can be found  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">here</a>
 Calling this method will parse the apache2 logs and create a JSON file that contains the number of tiems each status code was seen. 
 
-### get_ua
+# get_ua
 User Agents are used to tell the website what type of device you are. User-agents have information about the device like the Operating system, the type of browser. The user sending the requests can change the user-agent to anything they want. A lot of scripts or programs will change their useragent to the name of the project. For example, the user agent went someone is using cURL to send requests to a site will contain Curl. This can be changed easily. User agents also allow web sites to act differently depending on the type of device, os or even the browser. 
 
 ```ruby
@@ -62,7 +62,7 @@ json = Template.new("access.log.4").get_ip
 ```
 More information about user agents can be found <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent">here</a>
 
-### get_method
+# get_method
 ```ruby
 require_relative 'lib'
 # Scrapes the ips from the apache2 log file. 
@@ -71,7 +71,7 @@ json = Template.new("access.log.4").get_ip
 
 ```
 
-### Download the access.log file remotely
+# Download the access.log file remotely
 ```ruby
 require_relative 'lib'
 require 'date'
@@ -81,7 +81,7 @@ d    = DownloadFile.new(date)
 d.dl_file
 ```
 
-### Using the SaveBar class
+# Using the SaveBar class
 ```ruby
 require_relative 'lib'
 require_relative 'gruff'
@@ -93,7 +93,7 @@ SaveBar.new(json, png, title: "Paths", json: true).create_bar
 The `SaveBar` class is used to take the JSON that was scraped from the logs and it will create a bar graph with the data. 
 The `SaveBar` class has a instance variable that is named json. If `json` was set as true then the class will accept JSON data instead of reading a JSON file. If the instance variable json was set to false then the class will accept JSON files. The title of the graph is Paths. The `FileDate` class can be used to get create a file with the current date in the name as its name. The FileDate class is used in the example above to create a string with the current date. This string will be name of the PNG file that contains the bar graph.
 
-### Scraping logs & create bar graph w/o saving JSON
+# Scraping logs & create bar graph w/o saving JSON
 ```ruby
 require_relative 'lib'
 require_relative 'gruff'
@@ -108,7 +108,7 @@ png = FileDate.new(".png").date_file
 SaveBar.new(j, png, title: "IPS", json: true).create_bar
 
 ```
-### Discord.rb
+# Discord.rb
 ```ruby
 require 'discordrb'
 require 'open3'
@@ -129,7 +129,7 @@ The code is meant to be ran by a cronjob every day at 6 PM. Make sure that the a
 The snippet above is the crontab that I used on VPS to run the script. It will run every day at 6:00 PM.
 
 
-### honeypot.rb
+# honeypot.rb
 ```ruby
 puts HoneyPot.new(type: 4).scan
 
@@ -167,7 +167,7 @@ Type.new("access.log", "date").switch_name
 ```
 The snippet above shows the Type class in action. Instead of using a number for thet type, the `switch_name` method uses names to get the name of the method to run. The code snippet above will extract dates from the logs. 
 
-### Log Crawling
+# Log Crawling
 ```ruby
 require_relative 'lib'
 puts LogsCrawl.new(4).run
@@ -176,7 +176,7 @@ puts LogsCrawl.new(4).run
 Instead of having to reuse the same code everytime  ( auto_scrape.rb) when the user wants to loop through all thefiles in the directory looking for access.logs, the `LogsCrawl` class can be called.  Similiar to the hoenypot code, the class uses the same types listed in the table above. The code will return a HASH with the data from the logs. 
 
 
-### program.rb
+# program.rb
 
 Get stats of IPs
 ```ruby
@@ -200,3 +200,14 @@ ruby program.rb --s 3 --print
 ```
 The 3 is the type, IP.
 More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here,</a> <a href="https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html">here</a>
+
+
+# Samples
+```ruby
+require_relative 'lib'
+require_relative 'gruff'
+require 'json'
+
+
+p Sample.new(3).run 
+```
