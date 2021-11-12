@@ -2,7 +2,7 @@ require 'gruff'
 require_relative 'lib'
 require 'json'
 class SaveBar
-  def initialize(file_name, out, title: nil, json: false, num: 10, show_labels: false)
+  def initialize(file_name, out, title: nil, json: false, num: 10, show_labels: false, remove: false)
     @title       = title
     @out         = out
     @g           = Gruff::Bar.new(1000)
@@ -11,9 +11,13 @@ class SaveBar
     @num         = num
     @show_labels = show_labels
     if !json
-      @j        = JSON.parse(File.read(@file_name)).sort_by{|k,v| -v}.first(@num).to_h
+      @j         = JSON.parse(File.read(@file_name)).sort_by{|k,v| -v}.first(@num).to_h
     else 
-      @j        = @file_name.sort_by{|k,v| -v}.first(@num)
+      if !remove
+        @j       = @file_name.sort_by{|k,v| -v}.first(@num)
+      else
+        @j       = @file_name.sort_by{|k,v| -v}.delete_if {|key, value| key == "/" }.first(@num)
+      end
     end
   end
   def color2

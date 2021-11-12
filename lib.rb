@@ -65,8 +65,8 @@ class Config
 end
 class Template
     def initialize(file)
-        @file = file
-        @read = File.readlines(@file)
+        @file   = file
+        @read   = File.readlines(@file)
     end
     def count_total(array)
         h = {}
@@ -78,7 +78,7 @@ class Template
             end
         end
     return h
-    end
+end
     def get_date
         # todo: split up the dates & times
         date = []
