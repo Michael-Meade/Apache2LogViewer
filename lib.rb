@@ -390,3 +390,28 @@ class Sample
         return out.sample(@num).sort_by{|k,v| -v}
     end
 end
+class Search
+    def initialize(read_file, type, out)
+        @read_file = read_file
+        @type       = type
+        @out        = out
+    end
+    def combine
+        j = {}
+        r = File.read(@read_file)
+        JSON.parse(r).each do |k,v|
+            Dir['*'].each do |file_name|
+                if file_name.include?("access")
+                    json = Template.new(file_name).search(k, @type.to_i)
+                    if !json.empty?
+                       tmp =  {
+                            "#{k}" => json
+                        } 
+                        j.merge!(tmp)
+                    end
+                end
+            end
+        end
+        File.open(@out, 'w') {|f| f.write(j.to_json) }
+    end
+end

@@ -1,6 +1,6 @@
 require_relative 'lib'
 require_relative 'gruff'
-
+=begin
 j = {}
 Dir['*'].each do |file_name|
     if file_name.include?("access.log")
@@ -9,3 +9,6 @@ Dir['*'].each do |file_name|
     end
 end
 p j
+=end
+
+Search.new("ip_auto_test.json", 2, "boo.json").combine

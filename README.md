@@ -211,7 +211,6 @@ require 'json'
 
 p Sample.new(3).run 
 ```
-
 # Percent
 ```ruby
 require_relative 'lib'
@@ -222,3 +221,4 @@ j      = ips.sort_by {|k, v| v}.reverse.first(10)
 
 Print.new(j, "IPs in %", "ip", "%").print_table
 ```
+
