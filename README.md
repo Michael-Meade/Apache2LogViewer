@@ -198,6 +198,10 @@ Print out stats table
 ```ruby
 ruby program.rb --s 3 --print
 ```
+List Types
+```ruby
+    ruby program.rb -list
+```
 The 3 is the type, IP.
 More examples can be found <a href="https://michael-meade.github.io/Projects/apache2-log-reader.html">here,</a> <a href="https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html">here</a>
 
