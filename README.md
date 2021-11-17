@@ -221,7 +221,3 @@ j      = ips.sort_by {|k, v| v}.reverse.first(10)
 
 Print.new(j, "IPs in %", "ip", "%").print_table
 ```
-<<<<<<< HEAD
-
-=======
->>>>>>> 328da05e12b9b8acf361db12fc4c18935c88c020

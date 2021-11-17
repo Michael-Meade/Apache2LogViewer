@@ -93,7 +93,7 @@ if options[:ua]
   logs_crawl(5, "ua")
 end
 if options[:meth]
-  logs_crawl(6, "Meth")
+  logs_crawl(6, "Methods")
 end
 if options[:ssh]
   date   = Date.today.to_s + ".access"+ ".log"

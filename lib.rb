@@ -78,13 +78,25 @@ class Template
             end
         end
     return h
-end
+    end
     def get_date
         # todo: split up the dates & times
         date = []
         @read.each do |i|
             if not i.split("[").nil?
                 date << i.split("[")[1].split("]")[0]
+            end
+        end
+    return count_total(date)
+    end
+    def get_date2
+        # todo: split up the dates & times
+        date = []
+        @read.each do |i|
+            if not i.split("[").nil?
+               
+                date << i.split("[")[1].split(":")[0]
+                #date << i.split("[")[1].split("]")[0]
             end
         end
     return count_total(date)
