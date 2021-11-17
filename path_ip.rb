@@ -9,9 +9,6 @@ Dir['*'].each do |file_name|
     end
 end
 #p j
-array = []
-Dir['*'].each  { |file_name| array << file_name if file_name.include?("access.log") }
-p array.sort.reverse
-type = "IP"
+
 png = FileDate.new(".png", type: type).date_file
 SaveBar.new(j, png, title: type, json: true, num: 10, show_labels: true).create_bar

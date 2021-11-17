@@ -221,6 +221,7 @@ j      = ips.sort_by {|k, v| v}.reverse.first(10)
 
 Print.new(j, "IPs in %", "ip", "%").print_table
 ```
+The code will use the Stats class to get the data. Sort the data and grab the first 10 elements. The print class will take the top ten IP array and print out a table displaying the results.
 
 # Sort Date
 ```ruby
@@ -237,4 +238,20 @@ type = "IP"
 png  = FileDate.new(".png", type: type).date_file
 SaveBar.new(j, png, title: type, json: true, num: 10, show_labels: true).create_bar
 ```
-The code above will extract the IPs of the three latest logs and display the information in a bar graph.
+The code above will extract the IPs of the three latest logs and display the information in a bar graph. The code will first create an array with all the files that include the string "access.log". Next the code will sort the elements in order and grab the first three elements. The code will then loop through the array using the elements to input the log file names into the Template class so that the top IPs can be extracted from the log files and made into a bar graph. 
+
+# Date2
+```ruby
+require_relative 'lib'
+require_relative 'gruff'
+j = {}
+Dir['*'].each do |file_name|
+    if file_name.include?("access.log")
+        json = Template.new(file_name).get_date2
+        j.merge!(json) { |k, m, n| m + n }
+    end
+end
+
+SaveBar.new(j, "date2.png", title: "Dates", json: true, num: 10, show_labels: true).create_bar
+```
+The `date2` method is a improvement of date. The code now only gets the Month, day and year instead of the whole time stamp.
