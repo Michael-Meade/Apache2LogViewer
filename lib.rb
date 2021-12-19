@@ -187,6 +187,9 @@ class SaveFile
     def check_exists
         return File.exist?(@file_name)
     end
+    def file_name=(fn)
+        @file_name
+    end
     def write_json
         if !check_exists
             File.open(@file_name, 'a') { |f| f.write(JSON.generate(@json)) }
@@ -313,7 +316,7 @@ class Types
             return "search"
         end
     end
-    def switch(ip=nil, type: nil)
+    def switch(ip=nil)
         if @type == 1
             return @t.get_date
         elsif @type == 2
@@ -425,5 +428,27 @@ class Search
             end
         end
         File.open(@out, 'w') {|f| f.write(j.to_json) }
+    end
+end
+class Sort
+    def initialize(day_count: 1, type: 1)
+        @day_count = day_count
+        @type      = type
+    end
+    def type=(t)
+        @type = t
+    end
+    def day_count=(dc)
+        @day_count = dc
+    end
+    def date_sort
+        j     = {}
+        array = []
+        Dir['*'].each  { |file_name| array << file_name if file_name.include?("access.log") }
+        array.sort.reverse.first(@day_count.to_i).each do |i|
+            json = Types.new(i, @type).switch
+            j.merge!(json) { |k, m, n| m + n }
+        end
+    return j
     end
 end

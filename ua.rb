@@ -9,6 +9,13 @@ Dir['*'].each do |file_name|
         #json = json.delete_if {|key, value| key[1] == "/" or key[  
     end
 end
+
+j.each do |k,v|
+    if k.include?("jnd")
+        p k
+    end
+end
+=begin
 out = []
 j.each do |key, value|
     u = UAHelper.new(key)
@@ -17,3 +24,4 @@ end
 o = Template.new().count_total(out)
 puts o
 SaveBar.new(o, "ips_ddddd.png", title: "UA product", json: true, num: 10, show_labels: true).create_bar
+=end
