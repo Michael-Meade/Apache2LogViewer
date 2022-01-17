@@ -1,8 +1,8 @@
-  require_relative 'lib'
+require_relative 'lib'
 require_relative 'gruff'
 require 'date'
 require 'optparse'
-options = {}
+options = {width: 100}
 OptionParser.new do |opts|
   opts.banner = "Usage: example.rb [options]"
   opts.on("--print [PRINT]") do |v|
@@ -47,16 +47,15 @@ OptionParser.new do |opts|
   opts.on("-list") do |v|
       options[:list]  =  v
   end
+  opts.on("--width [WIDTH]") do |v|
+      options[:width]  =  v
+  end
 end.parse!
 def logs_crawl(type, name)
     lc  = LogsCrawl.new(type).run
     png = FileDate.new(".png", type: name).date_file
     SaveBar.new(lc, png, title: name, json: true, num: 10, show_labels: true).create_bar
 end
-
-
-
-
 if options[:date]
   logs_crawl(1, "date")
 end
@@ -110,7 +109,7 @@ if options[:s]
     png  = FileDate.new(".png", type: s.to_s ).date_file
     SaveBar.new(stats.first(10), png, title: "Stats", json: true, num: 10, show_labels: true).create_bar
   else
-    Print.new(stats.first(10), width:100).print_table
+      Print.new(stats.first(10), width: options[:width].to_i).print_table
   end
 end
 if options[:sip]

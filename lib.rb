@@ -2,6 +2,7 @@ require 'date'
 require 'terminal-table'
 require 'json'
 require 'net/ssh'
+require 'net/scp'
 require 'colorize'
 class HoneyPot
     def initialize(config_file: "honeypot_config.json", type: 4)
@@ -42,6 +43,35 @@ class DownloadFile < SSH
     def dl_file
         txt   = SSH.new.login(@cmd)
         File.open(@file_name, 'w') { |f| f.write(txt) }
+    end
+end
+class SCP < SSH
+    def initialize(file_name="/var/log/apache2/access.log")
+        @file_name = file_name
+    end
+    def file_name=(f)
+        @file_name = f
+    end
+    def run
+        c      = Config.new
+        Net::SSH.start(c.ip, c.uname, :password => c.pass, :port => c.port) do |ssh|
+            ssh.scp.download! @file_name, "access.log.gz"
+        end
+    end
+    def scan
+        i = 0
+        c      = Config.new
+        while i <= 13
+            file = "/var/log/apache2/access.log.#{i}.gz"
+            begin
+                Net::SSH.start(c.ip, c.uname, :password => c.pass, :port => c.port) do |ssh|
+                    ssh.scp.download! file, "access.log.#{i}.gz"
+                end
+            rescue Net::SCP::Error => e
+                puts e
+            end
+            i += 1
+        end
     end
 end
 class Config
@@ -129,13 +159,16 @@ class Template
     return count_total(urls)
     end
     def get_ua
-        ua = []
-        @read.each do |i|
-            if not i.split('"')[5].nil?
-                if not i.split('"')[5] == "-"
-                    ua << i.split('"')[5]
+        begin
+            ua = []
+            @read.each do |i|
+                if not i.split('"')[5].nil?
+                    if not i.split('"')[5] == "-"
+                        ua << i.split('"')[5]
+                    end
                 end
             end
+        rescue ArgumentError
         end
     return count_total(ua)
     end
