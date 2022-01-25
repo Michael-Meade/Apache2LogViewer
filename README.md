@@ -5,7 +5,7 @@
     [INSTALLING GEMS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Installing-the-gems-needed) • 
     [COMMAND LINE PROGRAM](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#programrb) • 
     [Types](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Types) • 
-    LOGS CRAWLER](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#log-crawling)**
+    [LOGS CRAWLER](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#log-crawling)**
     
 </div>
 
