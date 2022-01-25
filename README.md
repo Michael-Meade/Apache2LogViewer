@@ -1,14 +1,17 @@
 
 <div align="center">
 
-**[INSTALLING GEMS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Installing-the-gems-needed) • 
-    [COMMAND LINE PROGRAM](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#program.rb) • 
-    [COMMANDS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#commands)**
+**[]ABOUT](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#About) •
+    [INSTALLING GEMS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Installing-the-gems-needed) • 
+    [COMMAND LINE PROGRAM](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#programrb) • 
+    [LOGS CRAWLER](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#log-crawling)**
     
 </div>
 
-# Apache2LogViewer
-More info can be found @ <a href="https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html">https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html</a>
+# About
+More info can be found @ <a href="https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html">https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html</a>.
+This program can be used to parse Apache2 logs. It has many handy features that include sorting by date, printing the results in terminal table.
+saving the data in a JSON files, creating bar graphs of the data and much much more!
 
 # Installing the gems needed
 ```bash
