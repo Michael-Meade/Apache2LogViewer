@@ -1,7 +1,7 @@
 
 <div align="center">
 
-**[]ABOUT](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#About) •
+**[ABOUT](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#About) •
     [INSTALLING GEMS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Installing-the-gems-needed) • 
     [COMMAND LINE PROGRAM](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#programrb) • 
     [LOGS CRAWLER](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#log-crawling)**
