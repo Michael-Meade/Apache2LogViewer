@@ -4,7 +4,8 @@
 **[ABOUT](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#About) •
     [INSTALLING GEMS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Installing-the-gems-needed) • 
     [COMMAND LINE PROGRAM](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#programrb) • 
-    [LOGS CRAWLER](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#log-crawling)**
+    [Types](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Types) • 
+    LOGS CRAWLER](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#log-crawling)**
     
 </div>
 
@@ -25,7 +26,31 @@ gem install gruff
 ```bash
 gem install colorize
 ```
+# Types
 
+|     type #    |    method     |
+| ------------- | ------------- |
+|       1       |   get_date    |
+|       2       |   get_status  |
+|       3       |   get_ip      |
+|       4       |   get_path    |
+|       5       |   get_ua      |
+|       6       |   get_method  |
+|       7       |   ip_path     |
+
+The available types & methods.
+
+|  method name  |    method     |
+| ------------- | ------------- |
+|  "date"       |   get_date    |
+|  "status"     |   get_status  |
+|  "ip"         |   get_ip      |
+|  "path"       |   get_path    |
+|  "ua"         |   get_ua      |
+|  "method"     |   get_method  |
+|  "ip_path"    |   ip_path     | 
+
+The method names and method.
 # Read from json file print table
 ```ruby
 require_relative 'lib'
