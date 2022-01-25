@@ -1,7 +1,7 @@
 
 <div align="center">
 
-    **[INSTALLING GEMS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Installing-the-gems-needed) • 
+**[INSTALLING GEMS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Installing-the-gems-needed) • 
     [COMMAND LINE PROGRAM](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#program.rb) • 
     [COMMANDS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#commands)**
     
