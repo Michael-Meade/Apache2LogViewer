@@ -11,4 +11,4 @@ end
 p j
 =end
 
-p Search.new("2021-11-11-ip.json", 2, "boo.json").combine
+p Search.new("2021-11-11-ip.json", 4, "boo2.json").combine

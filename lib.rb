@@ -113,6 +113,7 @@ class Template
         # todo: split up the dates & times
         date = []
         @read.each do |i|
+            i = i.encode!('UTF-8', 'UTF-8', :invalid => :replace)
             if not i.split("[").nil?
                 date << i.split("[")[1].split("]")[0]
             end
@@ -123,8 +124,8 @@ class Template
         # todo: split up the dates & times
         date = []
         @read.each do |i|
+            i = i.encode!('UTF-8', 'UTF-8', :invalid => :replace)
             if not i.split("[").nil?
-               
                 date << i.split("[")[1].split(":")[0]
                 #date << i.split("[")[1].split("]")[0]
             end
@@ -134,6 +135,7 @@ class Template
     def get_status
         status  = []
         @read.each do |i|
+            i = i.encode!('UTF-8', 'UTF-8', :invalid => :replace)
             if not i.split('"').nil?
                 status << i.split('"')[2].split(" ")[0]
             end
@@ -143,6 +145,7 @@ class Template
     def get_ip
         ips = []
         @read.each do |i|
+            i = i.encode!('UTF-8', 'UTF-8', :invalid => :replace)
             if not i.split(" - - ").nil?
                 ips << i.split("- -")[0].strip
             end
@@ -151,7 +154,8 @@ class Template
     end
     def get_path
         urls = []
-        @read.each do |i| 
+        @read.each do |i|
+            i = i.encode!('UTF-8', 'UTF-8', :invalid => :replace)
             if not i.split('"')[1].split(" ")[1].nil?
                 urls << i.split('"')[1].split(" ")[1]
             end
@@ -162,6 +166,7 @@ class Template
         begin
             ua = []
             @read.each do |i|
+                i = i.encode!('UTF-8', 'UTF-8', :invalid => :replace)
                 if not i.split('"')[5].nil?
                     if not i.split('"')[5] == "-"
                         ua << i.split('"')[5]
@@ -175,6 +180,7 @@ class Template
     def get_method
         meth = []
         @read.each do |i|
+            i = i.encode!('UTF-8', 'UTF-8', :invalid => :replace)
             if not i.split('"')[1].nil?
                 meth << i.split('"')[1].split(" ")[0]
             end
@@ -189,6 +195,7 @@ class Template
         # Uses the path_ip(ip) method to get all the web paths 
         # that it finds for that IP.
         ips.each_with_index do |ip|
+            i = i.encode!('UTF-8', 'UTF-8', :invalid => :replace)
             path  = path_ip(ip)
             path  = path.delete_if {|key, value| key.nil? or key.empty?}
             h[ip] = [path.compact]
@@ -201,6 +208,7 @@ class Template
         # gets all the paths from a certain IP.
         status  = []
         @read.each do |i|
+            i = i.encode!('UTF-8', 'UTF-8', :invalid => :replace)
             if not i.split('"').nil?
                 if i.split("- -")[0].strip == ip
                     status << SearchIP.new.options(i, type)

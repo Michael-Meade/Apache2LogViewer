@@ -1,5 +1,13 @@
+
+<div align="center">
+    **[INSTALLING GEMS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#Installing-the-gems-needed) • 
+    [COMMAND LINE PROGRAM](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#program.rb) • 
+    [COMMANDS](https://github.com/Michael-Meade/Apache2LogViewer/blob/main/README.md#commands)**
+</div>
+
 # Apache2LogViewer
 More info can be found @ <a href="https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html">https://michael-meade.github.io/Projects/program.rb-Apache2-log-viewer.html</a>
+
 # Installing the gems needed
 ```bash
 gem install terminal-table
